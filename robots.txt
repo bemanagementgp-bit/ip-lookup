@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /api/
-Sitemap: https://__SITE_URL__/sitemap.xml
+Sitemap: https://iplookup-tool.vercel.app/sitemap.xml

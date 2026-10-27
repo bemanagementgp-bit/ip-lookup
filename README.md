@@ -2,7 +2,7 @@
 
 Free "what is my IP" + IP/domain lookup: approximate location, ISP/ASN, reverse DNS, RDAP network owner and abuse contact, Tor exit check and datacenter/VPN heuristics. Pro adds batch lookups (up to 1,000 IPs), blacklist/reputation checks and CSV/JSON export.
 
-**Live URL:** https://__SITE_URL__/ (placeholder, replaced after the first deploy)
+**Live URL:** https://iplookup-tool.vercel.app/ (placeholder, replaced after the first deploy)
 
 Unlike the other mini apps this one is a static site **plus Vercel Node functions** in the same project (`api/*.js`, CommonJS). It has npm dependencies (`maxmind` and two MMDB packages), so Vercel runs `npm install` on deploy.
 
@@ -69,7 +69,7 @@ node test/run.js
 
 ## Deploy
 
-`vercel --prod` from this folder (or the repo's `deploy.sh`). `vercel.json` sets `maxDuration: 10`, `memory: 1024` and `includeFiles: node_modules/@ip-location-db/**/*.mmdb` so the databases ship with the functions (~150 MB uncompressed, under the 250 MB function limit). Then replace `__SITE_URL__` with the real domain in all files.
+`vercel --prod` from this folder (or the repo's `deploy.sh`). `vercel.json` sets `maxDuration: 10`, `memory: 1024` and `includeFiles: node_modules/@ip-location-db/**/*.mmdb` so the databases ship with the functions (~150 MB uncompressed, under the 250 MB function limit). Then replace `iplookup-tool.vercel.app` with the real domain in all files.
 
 ## Monetize
 
