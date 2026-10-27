@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#050403">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="IP Lookup">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Términos de uso | IP Lookup</title>
+  <meta name="description" content="Términos de uso de IP Lookup: uso aceptable, precisión de la geolocalización por IP y de las heurísticas, licencias Pro, límites de solicitudes y datos de terceros.">
+  <link rel="canonical" href="https://iplookup-tool.vercel.app/es/terms">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/config.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/consent.js"></script>
+  <script src="/monetize.js"></script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/terms">
+  <link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/terms">
+  <link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/terms">
+  <link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/terms">
+  <link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/terms">
+  <link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/terms">
+  <link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/terms">
+  <!-- hreflang:end -->
+  <meta property="og:locale" content="es_ES">
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+    <a class="brand" href="/es/" aria-label="Inicio de IP Lookup">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">IP Lookup</span><span class="brand-desc">Consulta de dirección IP</span></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <details class="more-tools">
+        <summary class="btn btn-ghost btn-sm" aria-label="Más herramientas"><span class="mt-label">Más herramientas</span> ▾</summary>
+        <div class="menu">
+          <a href="https://quickinvoice-tool.vercel.app"><span class="mi">Q</span>QuickInvoice<small>Facturas</small></a>
+          <a href="https://ratecalc-tool.vercel.app"><span class="mi">R</span>RateCalc<small>Tarifas freelance</small></a>
+          <a href="https://qrforge-tool.vercel.app"><span class="mi">Q</span>QRForge<small>Códigos QR</small></a>
+          <a href="https://squish-tool.vercel.app"><span class="mi">S</span>Squish<small>Compresor de imágenes</small></a>
+          <a href="https://growthcalc-tool.vercel.app"><span class="mi">G</span>GrowthCalc<small>Interés compuesto</small></a>
+          <a href="https://subnetkit-tool.vercel.app"><span class="mi">N</span>SubnetKit<small>Subredes IP</small></a>
+          <a href="https://shotstudio-tool.vercel.app"><span class="mi">S</span>Screenshot Studio<small>Mockups de capturas</small></a>
+          <a href="https://mockuplab-tool.vercel.app"><span class="mi">M</span>Social Mockup Lab<small>Mockups de chats y posts</small></a>
+          <a href="https://carouselmaker-tool.vercel.app"><span class="mi">C</span>Carousel Maker<small>Slides para carrusel</small></a>
+          <a href="https://creativeresize-tool.vercel.app"><span class="mi">R</span>Creative Resize<small>Formatos para redes</small></a>
+          <a href="https://framelab-tool.vercel.app"><span class="mi">F</span>Frame Lab<small>Marcos y mockups de fotos</small></a>
+          <a href="https://giveaway-tool.vercel.app"><span class="mi">G</span>Giveaway Picker<small>Sorteos de Instagram</small></a>
+          <a href="https://iplookup-tool.vercel.app" class="current"><span class="mi">I</span>IP Lookup<small>Consulta de IP</small></a>
+          <a href="https://sizeconverter-tool.vercel.app"><span class="mi">Z</span>Size Converter<small>Redimensionador de imágenes y videos</small></a>
+        </div>
+      </details>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="brand-by">por <b>Be Management</b></span>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Instala esta herramienta como app">⤓ Instalar</button>
+      <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button><button class="btn icon-btn btn-sm" data-action="theme" aria-label="Cambiar tema">◐</button>
+    </nav>
+    </div>
+  </div>
+</header>
+
+<main class="container content" style="max-width:820px">
+  <h1>Términos de uso</h1>
+  <p class="hint">Última actualización: 27 de octubre de 2026</p>
+
+  <h2>1. El servicio</h2>
+  <p>IP Lookup ofrece información sobre direcciones IP y nombres de dominio obtenida de bases de datos públicas y protocolos de red. Las funciones gratuitas se ofrecen tal cual, sin registro.</p>
+
+  <h2>2. Precisión</h2>
+  <p>La geolocalización es una estimación aproximada (ciudad o región) y puede ser incorrecta. Los indicadores de VPN y datacenter son heurísticas marcadas como "probables". Los resultados de las listas de bloqueo reflejan el estado de cada lista de terceros al momento de la revisión. No te bases en los resultados para decisiones legales, financieras o críticas para la seguridad.</p>
+
+  <h2>3. Uso aceptable</h2>
+  <ul>
+    <li>No uses el servicio para acosar, perseguir, rastrear ni intentar identificar a personas.</li>
+    <li>No sobrecargues el servicio: el acceso automatizado está limitado a 60 solicitudes por minuto por IP. El uso masivo requiere las consultas por lotes de Pro.</li>
+    <li>No revendas los resultados en bruto como si fueran tu propia base de datos. Los datos de DB-IP y RouteViews tienen licencia CC BY 4.0 y deben conservar su atribución ("IP geolocation by DB-IP", https://db-ip.com).</li>
+  </ul>
+
+  <h2>4. Licencia Pro</h2>
+  <p>Una licencia Pro es una compra única que desbloquea consultas por lotes de hasta 1,000 IP, revisión de listas negras y exportaciones en los dispositivos donde la actives. Las licencias reembolsadas o con contracargo se desactivan. Las funciones pueden evolucionar; mantendremos disponibles las funciones Pro principales durante toda la vida del producto.</p>
+
+  <h2>5. Responsabilidad</h2>
+  <p>El servicio se ofrece "tal cual", sin garantías de ningún tipo. En la máxima medida permitida por la ley, Be Management no es responsable de ningún daño derivado de su uso.</p>
+
+  <h2>6. Cambios</h2>
+  <p>Podemos actualizar estos términos. Si sigues usando el servicio después de un cambio, aceptas los nuevos términos.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>Una colección de herramientas gratuitas y privadas que funcionan por completo en tu navegador. IP Lookup es la herramienta de consulta de direcciones IP de la familia, creada y mantenida por Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>Más herramientas gratis</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Facturas</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Tarifas freelance</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · Códigos QR</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Compresor de imágenes</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Interés compuesto</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app">SubnetKit · Subredes IP</a></li>
+        <li><a href="https://shotstudio-tool.vercel.app">Screenshot Studio · Mockups de capturas</a></li>
+        <li><a href="https://mockuplab-tool.vercel.app">Social Mockup Lab · Mockups de chats y posts</a></li>
+        <li><a href="https://carouselmaker-tool.vercel.app">Carousel Maker · Slides para carrusel</a></li>
+        <li><a href="https://creativeresize-tool.vercel.app">Creative Resize · Formatos para redes</a></li>
+        <li><a href="https://framelab-tool.vercel.app">Frame Lab · Marcos y mockups de fotos</a></li>
+        <li><a href="https://giveaway-tool.vercel.app">Giveaway Picker · Sorteos de Instagram</a></li>
+        <li><a href="https://iplookup-tool.vercel.app" class="current">IP Lookup · Consulta de IP</a></li>
+        <li><a href="https://sizeconverter-tool.vercel.app">Size Converter · Redimensionador de imágenes y videos</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · IP Lookup. Datos aproximados de fuentes públicas. Las consultas no se guardan.</span>
+      <span><a href="/es/privacy" data-i18n-href="/es/privacy">Privacidad</a> · <a href="/es/terms" data-i18n-href="/es/terms">Términos</a> · <a href="#" data-action="cookie-settings">Configuración de cookies</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

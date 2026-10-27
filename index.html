@@ -84,6 +84,16 @@
   <script src="/i18n.js"></script>
   <script src="/consent.js"></script>
   <script src="/monetize.js"></script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/">
+  <link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/">
+  <link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/">
+  <link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/">
+  <link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/">
+  <link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/">
+  <link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/">
+  <!-- hreflang:end -->
 </head>
 <body>
 
@@ -116,9 +126,9 @@
       </details>
       <span class="sep" aria-hidden="true"></span>
       <span class="brand-by">by <b>Be Management</b></span>
-      <button class="btn btn-sm hidden" id="installBtn" onclick="installApp()" title="Install this tool as an app">⤓ Install</button>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Install this tool as an app">⤓ Install</button>
       <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
-      <button class="btn btn-primary btn-sm" onclick="openPro('nav')">Pro</button><button class="btn icon-btn btn-sm" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button><button class="btn icon-btn btn-sm" data-action="theme" aria-label="Toggle theme">◐</button>
     </nav>
     </div>
   </div>
@@ -243,12 +253,12 @@
           <li>Export results as CSV or JSON</li>
           <li>Supports a small independent tool</li>
         </ul>
-        <button class="btn btn-primary btn-block" onclick="openPro('sidebar')">Get Pro – <span data-pro-price>$9</span> one-time</button>
+        <button class="btn btn-primary btn-block" data-action="pro" data-arg="sidebar">Get Pro – <span data-pro-price>$9</span> one-time</button>
       </div>
       <div class="card lead-card" id="leadCard" hidden>
         <h3>Networking tips & tools</h3>
         <p class="hint">Practical networking guides and new free tools for IT people, once or twice a month. No spam.</p>
-        <form class="lead-form" onsubmit="return subscribeNewsletter(event)">
+        <form class="lead-form" data-action="newsletter">
           <input type="email" name="email" required placeholder="you@email.com" aria-label="Email address" autocomplete="email">
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
           <button class="btn btn-primary" type="submit">Subscribe</button>
@@ -329,14 +339,14 @@
     </div>
     <div class="footer-meta">
       <span>© <span data-year></span> Be Management · IP Lookup. Approximate data from public sources. Lookups are not stored.</span>
-      <span><a href="/privacy" data-i18n-href="/privacy">Privacy</a> · <a href="/terms" data-i18n-href="/terms">Terms</a> · <a href="#" onclick="window.bmConsent&&bmConsent.open();return false">Cookie settings</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+      <span><a href="/privacy" data-i18n-href="/privacy">Privacy</a> · <a href="/terms" data-i18n-href="/terms">Terms</a> · <a href="#" data-action="cookie-settings">Cookie settings</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
     </div>
   </div>
 </footer>
 
 <div class="modal" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proTitle">
   <div class="card">
-    <button class="btn btn-sm close" onclick="closePro()" aria-label="Close">✕</button>
+    <button class="btn btn-sm close" data-action="close-pro" aria-label="Close">✕</button>
     <h3 id="proTitle">Upgrade to IP Lookup Pro <span class="pro-badge">LIFETIME</span></h3>
     <div class="price"><span id="proPrice"></span> <small>one-time</small></div>
     <ul>
@@ -345,9 +355,9 @@
       <li>Export batch results as CSV and JSON</li>
       <li>Lifetime access, no subscription</li>
     </ul>
-    <button class="btn btn-primary btn-block" onclick="goCheckout()">Get Pro</button>
-    <p class="hint" style="margin-top:12px">Already purchased? <a href="#" onclick="document.getElementById('licenseRow').classList.toggle('hidden');return false">Enter license key</a></p>
-    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="License key" aria-label="License key"><button class="btn" onclick="activateLicense(document.getElementById('licenseKey').value)">Activate</button></div>
+    <button class="btn btn-primary btn-block" data-action="checkout">Get Pro</button>
+    <p class="hint" style="margin-top:12px">Already purchased? <a href="#" data-action="toggle-license">Enter license key</a></p>
+    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="License key" aria-label="License key"><button class="btn" data-action="activate-license">Activate</button></div>
   </div>
 </div>
 <script src="/app.js"></script>

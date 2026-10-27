@@ -1,4 +1,4 @@
-const { handler, json, body, validateKey } = require('../lib/http');
+const { handler, json, body, validateKey, licenseKey } = require('../lib/http');
 const { lookupIp, attribution } = require('../lib/lookup');
 
 const FREE_MAX = 10, PRO_MAX = 1000, CONCURRENCY = 24, RDNS_BUDGET_MS = 6000;
@@ -11,12 +11,14 @@ const FREE_MAX = 10, PRO_MAX = 1000, CONCURRENCY = 24, RDNS_BUDGET_MS = 6000;
 module.exports = handler(['POST'], async (req, res) => {
   const b = body(req);
   let list = b.ips;
-  if (typeof list === 'string') list = list.split(/[\s,;]+/);
+  if (typeof list === 'string') list = list.length > 100000 ? null : list.split(/[\s,;]+/);
   if (!Array.isArray(list)) return json(res, 400, { error: 'Send {"ips": ["1.2.3.4", ...]}' });
-  const ips = [...new Set(list.map(x => String(x || '').trim()).filter(Boolean))];
+  // Bound the work before de-duplicating: at most 5000 raw entries, each a short string.
+  if (list.length > 5000) return json(res, 400, { error: `Maximum ${PRO_MAX} IPs per batch` });
+  const ips = [...new Set(list.filter(x => typeof x === 'string' || typeof x === 'number').map(x => String(x).trim().slice(0, 64)).filter(Boolean))];
   if (!ips.length) return json(res, 400, { error: 'No IP addresses provided' });
   if (ips.length > PRO_MAX) return json(res, 400, { error: `Maximum ${PRO_MAX} IPs per batch` });
-  const pro = ips.length > FREE_MAX ? await validateKey(b.key) : false;
+  const pro = ips.length > FREE_MAX ? await validateKey(licenseKey(req, b)) : false;
   if (ips.length > FREE_MAX && !pro) return json(res, 402, { error: `Free batch lookups are limited to ${FREE_MAX} IPs. Upgrade to Pro for up to ${PRO_MAX}.`, upgrade: true, limit: FREE_MAX });
 
   const start = Date.now();

@@ -28,10 +28,12 @@
   const geoUrl = () => (((window.APP_CONFIG || {}).PAYMENTS || {}).url || 'https://bm-payments.vercel.app').replace(/\/$/, '') + '/api/geo';
 
   // languages actually pre-rendered for this app (written by i18n-tools build); none → no redirects
-  const metaLangs = document.querySelector('meta[name="bm-langs"]');
-  const AVAILABLE = metaLangs ? metaLangs.content.split(',').map(s => s.trim()).filter(l => LANGS.includes(l)) : ['en'];
+  // (read lazily: i18n.js runs in <head> before the meta tag is parsed)
+  const available = () => { const mt = document.querySelector('meta[name="bm-langs"]'); return mt ? mt.content.split(',').map(s => s.trim()).filter(l => LANGS.includes(l)) : ['en']; };
   function go(lang, why) {
-    if (lang === current || !AVAILABLE.includes(lang)) return;
+    if (lang === current) return;
+    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', () => go(lang, why), { once: true }); return; }
+    if (!available().includes(lang)) return;
     if (why) try { sessionStorage.setItem('bm_lang_why', why); } catch (e) {}
     location.replace(localized(lang) + location.search + location.hash);
   }
@@ -119,8 +121,9 @@
   // ---- 3. switcher + hero decoration ----
   function mountSwitcher() {
     document.querySelectorAll('#langSelect').forEach(sel => {
-      sel.closest('.lang-switch')?.classList.toggle('hidden', AVAILABLE.length < 2);
-      sel.innerHTML = AVAILABLE.map(l => `<option value="${l}" ${l === current ? 'selected' : ''} title="${NAMES[l]}">${LABELS[l]}</option>`).join('');
+      const AV = available();
+      sel.closest('.lang-switch')?.classList.toggle('hidden', AV.length < 2);
+      sel.innerHTML = AV.map(l => `<option value="${l}" ${l === current ? 'selected' : ''} title="${NAMES[l]}">${LABELS[l]}</option>`).join('');
       sel.setAttribute('translate', 'no');
       sel.addEventListener('change', () => { store.set('bm_lang', sel.value); location.href = localized(sel.value) + location.search + location.hash; });
     });

@@ -1,11 +1,11 @@
 const { test, assert } = require('./_assert');
 
 let n = 0;
-function call(mod, { method = 'GET', query = {}, body, ip, host = 'example.vercel.app' } = {}) {
+function call(mod, { method = 'GET', query = {}, body, ip, host = 'example.vercel.app', headers: reqHeaders = {}, socket = {} } = {}) {
   ip = ip || '203.0.113.' + (++n % 250);
   return new Promise((resolve, reject) => {
     const headers = {}; let status = 200;
-    const req = { method, query, body, headers: { 'x-forwarded-for': ip, host }, socket: {} };
+    const req = { method, query, body, headers: Object.assign({ 'x-forwarded-for': ip, host }, reqHeaders), socket };
     const res = {
       set statusCode(v) { status = v; }, get statusCode() { return status; },
       setHeader(k, v) { headers[k.toLowerCase()] = v; }, getHeader(k) { return headers[k.toLowerCase()]; },
@@ -74,4 +74,67 @@ test('rate limit: 61st request in a minute → 429', async () => {
   let last;
   for (let i = 0; i < 61; i++) last = await call('lookup', { ip: '198.51.100.77', query: { q: '' } });
   assert.strictEqual(last.status, 429);
+});
+
+// ---- license key transport (header / JSON body; query string only as deprecated fallback) ----
+test('blacklist: Pro key via X-License-Key header', async () => {
+  process.env.PRO_TEST_KEYS = 'TEST-PRO';
+  const r = await call('blacklist', { query: { ip: '10.0.0.1' }, headers: { 'x-license-key': 'TEST-PRO' } });
+  assert.strictEqual(r.status, 200);
+  assert.strictEqual(r.body.ip, '10.0.0.1');
+});
+test('blacklist: Pro key via POST JSON body', async () => {
+  process.env.PRO_TEST_KEYS = 'TEST-PRO';
+  const r = await call('blacklist', { method: 'POST', body: { ip: '10.0.0.1', key: 'TEST-PRO' } });
+  assert.strictEqual(r.status, 200);
+  assert.strictEqual(r.body.ip, '10.0.0.1');
+});
+test('blacklist: POST body as raw JSON string', async () => {
+  process.env.PRO_TEST_KEYS = 'TEST-PRO';
+  const r = await call('blacklist', { method: 'POST', body: JSON.stringify({ ip: '10.0.0.1', key: 'TEST-PRO' }) });
+  assert.strictEqual(r.status, 200);
+});
+test('blacklist: deprecated ?key= query fallback still accepted', async () => {
+  process.env.PRO_TEST_KEYS = 'TEST-PRO';
+  const r = await call('blacklist', { query: { ip: '10.0.0.1', key: 'TEST-PRO' } });
+  assert.strictEqual(r.status, 200);
+});
+test('blacklist: wrong header key → 402 (header wins over query)', async () => {
+  process.env.PRO_TEST_KEYS = 'TEST-PRO';
+  const r = await call('blacklist', { query: { ip: '10.0.0.1', key: 'TEST-PRO' }, headers: { 'x-license-key': 'WRONG' } });
+  assert.strictEqual(r.status, 402);
+});
+test('blacklist: invalid / oversized ip → 400 without echoing input', async () => {
+  process.env.PRO_TEST_KEYS = 'TEST-PRO';
+  const evil = '<img src=x onerror=alert(1)>';
+  const r = await call('blacklist', { query: { ip: evil }, headers: { 'x-license-key': 'TEST-PRO' } });
+  assert.strictEqual(r.status, 400);
+  assert.ok(!JSON.stringify(r.body).includes('<img'));
+  const r2 = await call('blacklist', { query: { ip: '1'.repeat(100) }, headers: { 'x-license-key': 'TEST-PRO' } });
+  assert.strictEqual(r2.status, 400);
+});
+test('batch: Pro key via X-License-Key header', async () => {
+  process.env.PRO_TEST_KEYS = 'TEST-PRO';
+  const ips = Array.from({ length: 12 }, (_, i) => '10.1.0.' + (i + 1));
+  const r = await call('batch', { method: 'POST', body: { ips }, headers: { 'x-license-key': 'TEST-PRO' } });
+  assert.strictEqual(r.status, 200);
+  assert.strictEqual(r.body.count, 12);
+});
+test('batch: more than 1000 IPs → 400', async () => {
+  process.env.PRO_TEST_KEYS = 'TEST-PRO';
+  const ips = Array.from({ length: 1001 }, (_, i) => '10.' + (i >> 8) + '.' + (i & 255) + '.1');
+  const r = await call('batch', { method: 'POST', body: { ips, key: 'TEST-PRO' } });
+  assert.strictEqual(r.status, 400);
+});
+test('lookup: q longer than 253 chars (host part) → 400', async () => {
+  const r = await call('lookup', { query: { q: 'a'.repeat(250) + '.com' } });
+  assert.strictEqual(r.status, 400);
+});
+test('lookup: non-string q (array) → 400', async () => {
+  const r = await call('lookup', { query: { q: ['8.8.8.8', '1.1.1.1'] } });
+  assert.strictEqual(r.status, 400);
+});
+test('me: debug_ip ignored when Host is localhost but the peer is not loopback', async () => {
+  const r = await call('me', { ip: '8.8.8.8', host: 'localhost:5188', query: { debug_ip: '1.1.1.1' }, socket: { remoteAddress: '192.168.1.50' } });
+  assert.strictEqual(r.body.ip, '8.8.8.8');
 });

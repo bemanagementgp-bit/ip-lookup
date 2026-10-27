@@ -1,0 +1,11 @@
+[
+  "<strong>The Tor Project</strong> and <strong>abuse.ch</strong> to download their public lists (not per lookup; lists are cached).",
+  "Batch IP lookup <span class=\"pro-badge\" title=\"Free: up to 10 IPs · Pro: up to 1,000\">PRO</span>",
+  "Blacklist &amp; reputation check <span class=\"pro-badge\" data-pro-lock>PRO</span>",
+  "If analytics (Google Analytics) or advertising (Google AdSense) are enabled, those services may set cookies and process data such as your IP address and device information to measure usage and show ads, including personalised ads where permitted. You can opt out of personalised advertising at <a href=\"https://adssettings.google.com\" target=\"_blank\" rel=\"noopener\">Google Ads Settings</a>. Learn how Google uses data at <a href=\"https://policies.google.com/technologies/partner-sites\" target=\"_blank\" rel=\"noopener\">policies.google.com/technologies/partner-sites</a>.",
+  "Tor exit nodes are matched against the Tor Project's public exit list, so that flag is reliable. Datacenter and VPN flags are <strong>heuristics</strong>: we compare the network operator with lists of cloud, hosting and VPN providers and look for words like <em>vpn</em> or <em>server</em> in the reverse DNS name. The reasons are always shown, and the result says \"likely\" because a hosting network can also serve businesses, and some VPNs rent ordinary addresses.",
+  "Upgrade to IP Lookup Pro <span class=\"pro-badge\">LIFETIME</span>",
+  "Your <strong>public IP</strong> is assigned by your Internet provider and is what every website sees. Inside your home or office, devices use <strong>private addresses</strong> such as <code>192.168.1.20</code>, <code>10.0.0.5</code> or <code>172.16.0.8</code>. These ranges are reused by millions of networks, so your router translates them to its single public address (NAT). Many mobile and fibre providers add another layer, carrier-grade NAT (<code>100.64.0.0/10</code>), so several customers can share one public IP. Looking up a private address here explains what it is instead of inventing a location.",
+  "⬇ Export CSV <span class=\"pro-badge\" data-pro-lock>PRO</span>",
+  "⬇ Export JSON <span class=\"pro-badge\" data-pro-lock>PRO</span>"
+]

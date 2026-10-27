@@ -6,11 +6,15 @@
   const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
   const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const store = {
-    get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v, (key, val) => (key === '__proto__' || key === 'constructor' || key === 'prototype') ? undefined : val); } catch (e) { return d; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   };
   const proKey = () => { try { return localStorage.getItem('pro_license_key') || ''; } catch (e) { return ''; } };
   const FREE_BATCH = 10, PRO_BATCH = 1000;
+  // API data (RDAP, PTR, ASN names, attribution) is untrusted: links only for http(s) URLs, numbers coerced.
+  const safeHref = u => /^https?:\/\//i.test(String(u || '')) ? String(u) : '';
+  const numOr = (v, d) => (typeof v === 'number' && isFinite(v)) ? v : d;
+  const isEmail = v => typeof v === 'string' && /^[^\s@<>"'()]{1,64}@[a-z0-9.-]{1,253}$/i.test(v);
   const HIST_KEY = 'iplookup_history', BATCH_KEY = 'iplookup_batch_input';
 
   // ---------- price + pro locks ----------
@@ -38,7 +42,8 @@
   // ---------- shared renderers ----------
   const place = g => g ? [g.city, g.region && g.region !== g.city ? g.region : null, g.country].filter(Boolean).join(', ') : '';
   const flagEmoji = cc => cc && /^[A-Z]{2}$/.test(cc) ? String.fromCodePoint(...[...cc].map(c => 127397 + c.charCodeAt(0))) : '';
-  const osm = g => `https://www.openstreetmap.org/?mlat=${g.lat}&mlon=${g.lon}#map=10/${g.lat}/${g.lon}`;
+  const osm = g => { const la = numOr(g.lat, 0), lo = numOr(g.lon, 0); return `https://www.openstreetmap.org/?mlat=${la}&mlon=${lo}#map=10/${la}/${lo}`; };
+  const coords = g => `${esc(numOr(g.lat, ''))}, ${esc(numOr(g.lon, ''))}`;
 
   function pillsHtml(f) {
     if (!f) return '';
@@ -56,9 +61,10 @@
   }
   function attribHtml(list) {
     const lic = a => a.license ? ' (' + esc(a.license) + ')' : '';
-    return '<p class="attrib">' + (list || []).map(a => {
-      if (/ by DB-IP$/.test(a.text)) return `${esc(a.text.replace(/DB-IP$/, ''))}<a href="${esc(a.url)}" target="_blank" rel="noopener">DB-IP</a>${lic(a)}`;
-      return a.url ? `<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.text)}</a>${lic(a)}` : esc(a.text) + lic(a);
+    return '<p class="attrib">' + (Array.isArray(list) ? list : []).filter(a => a && typeof a.text === 'string').map(a => {
+      const href = safeHref(a.url);
+      if (/ by DB-IP$/.test(a.text) && href) return `${esc(a.text.replace(/DB-IP$/, ''))}<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">DB-IP</a>${lic(a)}`;
+      return href ? `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(a.text)}</a>${lic(a)}` : esc(a.text) + lic(a);
     }).join(' · ') + '</p>';
   }
   function specialHtml(r) {
@@ -96,7 +102,7 @@
     html += kv('ISP / organization', a && a.org ? esc(a.org) : null);
     html += kv('ASN', a ? 'AS' + esc(a.number) : null, { mono: true });
     html += kv('Reverse DNS', r.reverse_dns && r.reverse_dns.length ? esc(r.reverse_dns.join(', ')) : null, { mono: true });
-    html += kv('Coordinates', g && g.lat != null ? `${g.lat}, ${g.lon} · <a href="${esc(osm(g))}" target="_blank" rel="noopener">Open in OpenStreetMap</a>` : null);
+    html += kv('Coordinates', g && g.lat != null ? `${coords(g)} · <a href="${esc(osm(g))}" target="_blank" rel="noopener noreferrer">Open in OpenStreetMap</a>` : null);
     html += kv('Browser / device', esc(clientSummary()), { wide: true });
     html += '</dl>';
     html += attribHtml(d.attribution);
@@ -108,13 +114,13 @@
   function resultHtml(r) {
     if (r.error) return `<div class="result"><p class="err">${esc(r.ip)}: ${esc(r.error)}</p></div>`;
     const g = r.geo, a = r.asn, n = r.network;
-    let h = `<div class="result"><div class="result-head"><span class="ip">${esc(r.ip)}</span><span class="vtag">IPv${r.version}</span>
+    let h = `<div class="result"><div class="result-head"><span class="ip">${esc(r.ip)}</span><span class="vtag">IPv${esc(r.version)}</span>
       <button type="button" class="copy-mini" data-copy="${esc(r.ip)}">Copy</button></div>`;
     if (r.special) return h + specialHtml(r) + '</div>';
     h += '<h3 class="group-title">Location <span class="muted" style="text-transform:none;letter-spacing:0;font-weight:500">· approximate</span></h3><dl class="kv">';
     h += kv('Country', g && g.country ? `${flagEmoji(g.country_code)} ${esc(g.country)} <span class="muted">(${esc(g.country_code)})</span>` : null);
     h += kv('Region / city', g ? esc([g.region, g.city !== g.region ? g.city : null].filter(Boolean).join(' · ')) : null);
-    h += kv('Coordinates', g && g.lat != null ? `${g.lat}, ${g.lon} · <a href="${esc(osm(g))}" target="_blank" rel="noopener">Map</a>` : null);
+    h += kv('Coordinates', g && g.lat != null ? `${coords(g)} · <a href="${esc(osm(g))}" target="_blank" rel="noopener noreferrer">Map</a>` : null);
     if (g && g.timezone) h += kv('Time zone', esc(g.timezone));
     h += '</dl>';
     if (g && g.accuracy_note) h += `<p class="hint">${esc(g.accuracy_note)}</p>`;
@@ -125,18 +131,18 @@
     h += kv('Network name', n && n.name ? esc(n.name) : null, { mono: true });
     h += kv('Range / CIDR', n ? esc([n.cidr, n.range].filter(Boolean).join(' · ')) : null, { mono: true, wide: true });
     h += kv('Registry', n && n.registry ? esc(n.registry) : null);
-    h += kv('Abuse contact', n && n.abuse_email ? `<a href="mailto:${esc(n.abuse_email)}">${esc(n.abuse_email)}</a>` : null);
+    h += kv('Abuse contact', n && n.abuse_email ? (isEmail(n.abuse_email) ? `<a href="mailto:${esc(encodeURI(n.abuse_email))}">${esc(n.abuse_email)}</a>` : esc(n.abuse_email)) : null);
     h += '</dl>';
     if (r.network === null) h += '<p class="hint">Registration data (RDAP) was not available for this address right now.</p>';
     h += '<h3 class="group-title">Security</h3>' + pillsHtml(r.flags);
-    h += '<ul class="reasons">' + (r.flags.reasons || []).map(x => `<li>${esc(x)}</li>`).join('') + '</ul>';
+    h += '<ul class="reasons">' + (r.flags && Array.isArray(r.flags.reasons) ? r.flags.reasons : []).map(x => `<li>${esc(x)}</li>`).join('') + '</ul>';
     h += '</div>';
     return h;
   }
 
   let lookupSeq = 0;
   async function runLookup(q, opts) {
-    q = String(q || '').trim();
+    q = String(q || '').trim().slice(0, 2048); // share links / history are untrusted input
     const out = $('#lookupOut'), err = $('#lookupErr');
     err.textContent = '';
     if (!q) { err.textContent = 'Enter an IP address or a domain name.'; return; }
@@ -148,10 +154,11 @@
     catch (e) { d = { error: 'Network error. Check your connection and try again.' }; }
     if (seq !== lookupSeq) return;
     $('#lookupBtn').disabled = false;
-    if (d.error) { out.innerHTML = ''; err.textContent = d.error; return; }
+    if (d.error) { out.innerHTML = ''; err.textContent = String(d.error); return; }
+    if (!Array.isArray(d.results)) d.results = [];
     let h = '';
     if (d.host) h += `<p class="hint" style="margin-top:14px"><b>${esc(d.host)}</b> resolves to ${d.results.length} address${d.results.length > 1 ? 'es' : ''}${d.results.length >= 4 ? ' (first 4 shown)' : ''}.</p>`;
-    h += d.results.map(resultHtml).join('');
+    h += d.results.filter(r => r && typeof r === 'object').map(resultHtml).join('');
     const raw = Object.assign({}, d); delete raw._status;
     h += `<details class="raw"><summary>Raw JSON</summary><pre>${esc(JSON.stringify(raw, null, 2))}</pre></details>`;
     h += `<div class="row" style="margin-top:12px"><button type="button" class="btn btn-sm" id="shareBtn">🔗 Copy share link</button></div>`;
@@ -167,11 +174,11 @@
 
   // history (local only)
   function renderHistory() {
-    const list = store.get(HIST_KEY, []);
-    $('#history').innerHTML = list.map(q => `<button type="button" class="chip mono" data-q="${esc(q)}">${esc(q)}</button>`).join('');
+    $('#history').innerHTML = histList().map(q => `<button type="button" class="chip mono" data-q="${esc(q)}">${esc(q)}</button>`).join('');
   }
+  function histList() { const l = store.get(HIST_KEY, []); return Array.isArray(l) ? l.filter(x => typeof x === 'string').map(x => x.slice(0, 300)).slice(0, 10) : []; }
   function addHistory(q) {
-    const list = store.get(HIST_KEY, []).filter(x => x !== q);
+    const list = histList().filter(x => x !== q);
     list.unshift(q); store.set(HIST_KEY, list.slice(0, 10)); renderHistory();
   }
 
@@ -216,8 +223,9 @@
     catch (e) { d = { error: 'Network error. Try again.' }; }
     btn.disabled = false; btn.textContent = 'Run batch';
     if (d._status === 402 || d.upgrade) { err.textContent = d.error || 'Upgrade to Pro for larger batches.'; openPro('batch'); return; }
-    if (d.error) { err.textContent = d.error; return; }
-    batchRaw = d.results; batchRows = d.results.map(rowOf); sortState = { key: null, dir: 1 };
+    if (d.error) { err.textContent = String(d.error); return; }
+    if (!Array.isArray(d.results)) d.results = [];
+    batchRaw = d.results; batchRows = d.results.filter(r => r && typeof r === 'object').map(rowOf); sortState = { key: null, dir: 1 };
     renderBatch(); $('#batchOut').classList.remove('hidden');
     track('batch', { count: ips.length });
   }
@@ -233,7 +241,8 @@
     if (kind === 'json') download(`ip-lookup-${stamp}.json`, 'application/json', JSON.stringify({ results: batchRaw, attribution: ['IP geolocation by DB-IP (https://db-ip.com, CC BY 4.0)', 'ASN data: RouteViews / DB-IP (CC BY 4.0)'] }, null, 2));
     else {
       const cols = ['ip', 'country', 'city', 'asn', 'org', 'rdns', 'flags'];
-      const q = v => { const s = String(v == null ? '' : v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+      // CSV injection: cells starting with = + - @ TAB or CR get a leading ' so spreadsheets don't evaluate them
+      const q = v => { let s = String(v == null ? '' : v); if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; return /[",\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
       const csv = [cols.join(',')].concat(batchRows.map(r => cols.map(c => q(r[c])).join(','))).join('\n') + '\n# IP geolocation by DB-IP (https://db-ip.com) CC BY 4.0; ASN data: RouteViews / DB-IP CC BY 4.0\n';
       download(`ip-lookup-${stamp}.csv`, 'text/csv', csv);
     }
@@ -248,14 +257,16 @@
     if (!ip) { err.textContent = 'Enter an IP address.'; return; }
     out.innerHTML = '<div class="loading"><span class="spinner" aria-hidden="true"></span>Checking blocklists…</div>';
     let d;
-    try { d = await api('/api/blacklist?ip=' + encodeURIComponent(ip) + '&key=' + encodeURIComponent(proKey())); }
+    // License key travels in the X-License-Key header, never in the URL.
+    try { d = await api('/api/blacklist?ip=' + encodeURIComponent(ip.slice(0, 64)), { headers: { Accept: 'application/json', 'X-License-Key': proKey() } }); }
     catch (e) { d = { error: 'Network error. Try again.' }; }
-    if (d._status === 402) { out.innerHTML = ''; err.textContent = d.error; openPro('blacklist'); return; }
-    if (d.error) { out.innerHTML = ''; err.textContent = d.error; return; }
+    if (d._status === 402) { out.innerHTML = ''; err.textContent = String(d.error || ''); openPro('blacklist'); return; }
+    if (d.error) { out.innerHTML = ''; err.textContent = String(d.error); return; }
+    if (!Array.isArray(d.checks)) d.checks = [];
     const st = c => c.listed === true ? '<span class="bl-status listed">Listed</span>' : c.listed === false ? '<span class="bl-status clean">Clean</span>' : '<span class="muted">n/a</span>';
     out.innerHTML = `<p style="margin:14px 0 6px"><b class="mono">${esc(d.ip)}</b>: ${d.listed ? '<span class="bl-status listed">listed on at least one list</span>' : '<span class="bl-status clean">not listed</span>'}</p>
       <div class="table-wrap"><table id="blTable"><thead><tr><th>Source</th><th>Status</th><th>Detail</th></tr></thead><tbody>
-      ${d.checks.map(c => `<tr><td>${c.url ? `<a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.source)}</a>` : esc(c.source)}</td><td>${st(c)}</td><td>${esc(c.detail)}</td></tr>`).join('')}
+      ${d.checks.filter(c => c && typeof c === 'object').map(c => `<tr><td>${safeHref(c.url) ? `<a href="${esc(safeHref(c.url))}" target="_blank" rel="noopener noreferrer">${esc(c.source)}</a>` : esc(c.source)}</td><td>${st(c)}</td><td>${esc(c.detail)}</td></tr>`).join('')}
       </tbody></table></div><p class="hint">Delisting is handled by each list operator. Results reflect the moment of the check.</p>`;
     track('blacklist', {});
   }
@@ -294,7 +305,7 @@
     $('#blForm').addEventListener('submit', e => { e.preventDefault(); runBlacklist($('#blIp').value); });
 
     loadMe();
-    const q = new URLSearchParams(location.search).get('q');
+    const q = (new URLSearchParams(location.search).get('q') || '').slice(0, 2048);
     if (q) { $('#q').value = q; runLookup(q, { fromUrl: true }); }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();

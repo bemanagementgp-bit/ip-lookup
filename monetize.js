@@ -5,6 +5,10 @@
  */
 (function () {
   const C = window.APP_CONFIG || {};
+  // HTML-escape any value that is inserted with innerHTML (XSS defence)
+  const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' };
+  const escHTML = v => String(v == null ? '' : v).replace(/[&<>"'`]/g, ch => ESC[ch]);
+  window.bmEsc = escHTML;
 
   // ---- Theme ----
   const saved = localStorage.getItem('theme');
@@ -182,8 +186,8 @@
     if (!st) { st = document.createElement('p'); st.className = 'hint pro-status'; modal.querySelector('.card').appendChild(st); }
     if (isPro()) {
       const key = localStorage.getItem(K.key) || '';
-      st.innerHTML = '✅ Pro is active on this device' + (key ? ' (key …' + key.slice(-6) + ')' : '') +
-        ' · <a href="#" onclick="deactivateLicense();return false;">Deactivate</a>';
+      st.innerHTML = '✅ Pro is active on this device' + (key ? ' (key …' + escHTML(key.slice(-6)) + ')' : '') +
+        ' · <a href="#" data-action="deactivate">Deactivate</a>';
     } else st.innerHTML = '';
   }
 
@@ -229,10 +233,11 @@
     const q = new URLSearchParams(location.search);
     const mp = q.get('mp'); if (!mp) return;
     const clean = () => { try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {} };
-    if (mp === 'success' && (q.get('payment_id') || q.get('external_reference'))) {
+    if (mp === 'success' && q.get('payment_id') && q.get('external_reference')) {
       toast('Confirming your payment…');
       try {
-        const qs = q.get('payment_id') ? 'payment_id=' + encodeURIComponent(q.get('payment_id')) : 'external_reference=' + encodeURIComponent(q.get('external_reference'));
+        // both are required by the server: the random external_reference proves this browser made the purchase
+        const qs = 'payment_id=' + encodeURIComponent(q.get('payment_id')) + '&external_reference=' + encodeURIComponent(q.get('external_reference'));
         const res = await payApi('/api/license?' + qs);
         if (res.key) { setPro(true, res.key, 'mp'); track('purchase', { provider: 'mercadopago', app: res.app }); showKeyModal(res); }
         else toast(res.error || 'Payment not confirmed yet. Check your e-mail or contact support.');
@@ -251,12 +256,13 @@
   function showKeyModal(res) {
     const m = document.getElementById('proModal'); if (!m) { toast('Pro activated 🎉'); return; }
     const card = m.querySelector('.card');
-    card.innerHTML = `<button class="btn btn-sm close" onclick="closePro()">✕</button>
+    const key = String(res.key || '');
+    card.innerHTML = `<button class="btn btn-sm close" data-action="close-pro" aria-label="Close">✕</button>
       <h3>You're Pro 🎉</h3>
-      <p>${res.title ? 'Thanks for buying <strong>' + res.title + '</strong>.' : 'Thanks for your purchase.'} Pro is now active on this device.</p>
-      <p class="hint">Your license key (save it to activate on other devices${res.emailed ? '; we also e-mailed it to ' + res.email : ''}):</p>
-      <p style="font-family:var(--mono);font-size:1rem;background:var(--surface);padding:12px 14px;border-radius:12px;word-break:break-all;user-select:all">${res.key}</p>
-      <button class="btn btn-primary btn-block" onclick="navigator.clipboard&&navigator.clipboard.writeText('${res.key}').then(()=>toast('Key copied'));">Copy key</button>`;
+      <p>${res.title ? 'Thanks for buying <strong>' + escHTML(res.title) + '</strong>.' : 'Thanks for your purchase.'} Pro is now active on this device.</p>
+      <p class="hint">Your license key (save it to activate on other devices${res.emailed ? '; we also e-mailed it to ' + escHTML(res.email) : ''}):</p>
+      <p class="license-key" style="font-family:var(--mono);font-size:1rem;background:var(--surface);padding:12px 14px;border-radius:12px;word-break:break-all;user-select:all">${escHTML(key)}</p>
+      <button class="btn btn-primary btn-block no-arrow" data-action="copy-text" data-arg="${escHTML(key)}">Copy key</button>`;
     m.classList.add('open');
   }
   // Prices + extra purchase options in the Pro modal, from the catalog
@@ -267,13 +273,13 @@
       if (cat.app && cat.app.display) {
         document.querySelectorAll('#proPrice,[data-pro-price]').forEach(el => el.textContent = cat.app.display);
       }
-      const buy = document.querySelector('#proModal button[onclick="goCheckout()"]');
+      const buy = document.querySelector('#proModal [data-action="checkout"]');
       if (buy && !document.getElementById('bundleBtn')) {
         buy.insertAdjacentHTML('afterend', `
-          <button class="btn btn-block" id="bundleBtn" onclick="goBundle()" style="margin-top:8px">All 12 tools · ${cat.bundle.display} once</button>
-          <form class="lead-form" style="margin-top:8px" onsubmit="goSubscribe(this.email.value);return false;" title="Creative Pro: every tool while subscribed">
-            <input type="email" name="email" placeholder="you@email.com" aria-label="E-mail for subscription" required>
-            <button class="btn" type="submit">Subscribe ${cat.subscription.display}</button>
+          <button class="btn btn-block" id="bundleBtn" data-action="bundle" style="margin-top:8px">All tools · ${escHTML(cat.bundle && cat.bundle.display)} once</button>
+          <form class="lead-form" style="margin-top:8px" data-action="subscribe" title="Creative Pro: every tool while subscribed">
+            <input type="email" name="email" placeholder="you@email.com" aria-label="E-mail for subscription" required maxlength="120">
+            <button class="btn" type="submit">Subscribe ${escHTML(cat.subscription && cat.subscription.display)}</button>
           </form>
           <p class="hint tiny">Pay with Mercado Pago · card, debit, account balance. Lifetime keys never expire.</p>`);
       }
@@ -324,7 +330,7 @@
     if (!m) { toast('Use your browser menu → Add to Home Screen'); return; }
     const card = m.querySelector('.card');
     const prev = card.innerHTML;
-    card.innerHTML = '<button class="btn btn-sm close" onclick="closePro()">✕</button><h3>Install ' + (C.APP_NAME || '') + '</h3><p>' + how + '</p><p class="hint">Works offline once installed. No app store needed.</p>';
+    card.innerHTML = '<button class="btn btn-sm close" data-action="close-pro" aria-label="Close">✕</button><h3>Install ' + escHTML(C.APP_NAME || '') + '</h3><p>' + how + '</p><p class="hint">Works offline once installed. No app store needed.</p>';
     m.classList.add('open');
     m.addEventListener('transitionend', () => {}, { once: true });
     const restore = () => { if (!m.classList.contains('open')) { card.innerHTML = prev; renderProStatus(); document.removeEventListener('click', restore); } };
@@ -338,6 +344,39 @@
       if (isIOS() && !isStandalone()) showInstallBtn(); // iOS has no beforeinstallprompt; show manual instructions
     });
   }
+
+  // ---- Delegated actions: replaces inline onclick/onsubmit so the CSP can forbid inline scripts ----
+  // <button data-action="pro" data-arg="sidebar">  ·  <form data-action="newsletter">  ·  apps register more with bmActions.on(name, fn)
+  const ACTIONS = {
+    'pro': arg => openPro(arg),
+    'close-pro': () => closePro(),
+    'theme': () => toggleTheme(),
+    'install': () => installApp(),
+    'checkout': () => goCheckout(),
+    'bundle': () => goBundle(),
+    'deactivate': () => deactivateLicense(),
+    'toggle-license': () => { const r = document.getElementById('licenseRow'); if (r) { r.classList.toggle('hidden'); const i = r.querySelector('input'); if (i && !r.classList.contains('hidden')) i.focus(); } },
+    'activate-license': () => { const i = document.getElementById('licenseKey'); activateLicense(i ? i.value : ''); },
+    'cookie-settings': () => { if (window.bmConsent) bmConsent.open(); },
+    'copy-text': arg => { if (navigator.clipboard) navigator.clipboard.writeText(arg || '').then(() => toast('Copied'), () => toast('Copy failed')); }
+  };
+  const SUBMITS = {
+    'newsletter': (form, ev) => subscribeNewsletter(ev),
+    'subscribe': form => goSubscribe(form.querySelector('input[type=email]').value)
+  };
+  window.bmActions = { on(name, fn) { ACTIONS[name] = fn; }, onSubmit(name, fn) { SUBMITS[name] = fn; } };
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-action]');
+    if (!el || el.tagName === 'FORM' || !ACTIONS[el.dataset.action]) return;
+    if (el.tagName === 'A' || el.type === 'submit') e.preventDefault();
+    ACTIONS[el.dataset.action](el.dataset.arg, el, e);
+  });
+  document.addEventListener('submit', e => {
+    const f = e.target.closest('form[data-action]');
+    if (!f || !SUBMITS[f.dataset.action]) return;
+    e.preventDefault();
+    SUBMITS[f.dataset.action](f, e);
+  });
 
   document.addEventListener('DOMContentLoaded', () => {
     mountAds(); mountLead(); renderProStatus(); recheckLicense(); mountCatalog(); handlePaymentReturn();

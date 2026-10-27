@@ -6,7 +6,8 @@ const { lookupIp, resolveQuery, attribution } = require('../lib/lookup');
  * → { query, host?, results:[{ip,version,special?,geo,asn,reverse_dns,network,flags}], attribution }
  */
 module.exports = handler(['GET'], async (req, res) => {
-  const q = String(query(req).q || '').trim();
+  const rawQ = query(req).q;
+  const q = (typeof rawQ === 'string' ? rawQ : '').trim();
   const parsed = await resolveQuery(q);
   if (parsed.error) return json(res, parsed.status, { error: parsed.error });
   const results = await Promise.all(parsed.ips.map(x => lookupIp(x.ip, { rdap: true })));

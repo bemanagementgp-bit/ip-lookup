@@ -328,6 +328,8 @@ h1,h2{letter-spacing:-.045em;font-weight:700}
 /* ===== end shared base ===== */
 
 
+
+
 /* ===== IP Lookup – app specific ===== */
 .tool-col{display:flex;flex-direction:column;gap:20px;min-width:0}
 .card-title{font-size:1.15rem;margin:0 0 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}

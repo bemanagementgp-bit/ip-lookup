@@ -1,3 +1,5 @@
 dev-server.js
 test
 .env*
+serve.json
+i18n/src

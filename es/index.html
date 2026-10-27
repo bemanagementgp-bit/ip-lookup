@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#050403">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="IP Lookup">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>¿Cuál es mi dirección IP? Consulta de IP gratis – Ubicación, ISP, ASN, detección de VPN | IP Lookup</title>
+  <meta name="description" content="Mira tu dirección IP pública al instante y consulta cualquier IP o dominio: ubicación aproximada, ISP, ASN, DNS inverso, propietario de la red y señales de VPN, Tor o datacenter.">
+  <link rel="canonical" href="https://iplookup-tool.vercel.app/es/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://iplookup-tool.vercel.app/es/">
+  <meta property="og:title" content="¿Cuál es mi dirección IP? Consulta de IP gratis | IP Lookup">
+  <meta property="og:description" content="Tu IP pública más una consulta gratis de cualquier IP o dominio: ubicación aproximada, ISP/ASN, DNS inverso y detección de VPN, Tor o datacenter.">
+  <meta property="og:image" content="https://iplookup-tool.vercel.app/favicon.svg">
+  <meta property="og:site_name" content="IP Lookup">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="¿Cuál es mi dirección IP? – IP Lookup">
+  <meta name="twitter:description" content="Consulta de IP y dominios gratis: ubicación aproximada, ISP, ASN, DNS inverso y detección de VPN/Tor.">
+  <meta name="twitter:image" content="https://iplookup-tool.vercel.app/favicon.svg">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"IP Lookup – Cuál es mi dirección IP","url":"https://iplookup-tool.vercel.app/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Herramienta gratis que muestra tu dirección IP pública y consulta cualquier IP o dominio: ubicación aproximada, ISP, ASN, DNS inverso, registro de la red y señales de VPN, Tor o datacenter.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Cuál es mi IP (IPv4 e IPv6)","Consulta de IP y dominios","Geolocalización aproximada","ISP y ASN","DNS inverso","Propietario de la red y contacto de abuso vía RDAP","Heurísticas de VPN, Tor y datacenter","Consulta por lotes y revisión de listas negras (Pro)"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuál es mi dirección IP?","acceptedAnswer":{"@type":"Answer","text":"Tu dirección IP pública es la dirección que ven los sitios web cuando te conectas a ellos. La asigna tu proveedor de Internet (o tu VPN, si usas una) y la comparten todos los dispositivos detrás de tu router. IP Lookup la muestra en la parte superior de la página apenas carga, junto con si es IPv4 o IPv6."}},{"@type":"Question","name":"¿Alguien puede encontrar mi dirección exacta a partir de mi IP?","acceptedAnswer":{"@type":"Answer","text":"No. Las bases de datos de geolocalización por IP solo estiman la ciudad o región donde está registrada o enrutada una red, y a menudo se equivocan por decenas de kilómetros. Una dirección IP no revela una dirección postal ni a una persona. Solo tu proveedor de Internet puede vincular una IP con un abonado, y normalmente lo hace solo ante una orden judicial o una solicitud legal de las autoridades."}},{"@type":"Question","name":"¿Por qué la consulta de IP muestra la ciudad equivocada?","acceptedAnswer":{"@type":"Answer","text":"Los proveedores asignan direcciones de grandes grupos y las enrutan a través de nodos regionales, por lo que la base de datos suele mostrar la ciudad donde están los equipos del proveedor en lugar de la tuya. Las redes móviles, el NAT de operador, las VPN y las redes corporativas lo hacen aún menos preciso. Toma la ubicación como aproximada: el país suele ser correcto; la ciudad es una estimación."}},{"@type":"Question","name":"¿Cómo detecta IP Lookup las IP de VPN, Tor y datacenters?","acceptedAnswer":{"@type":"Answer","text":"Las salidas de Tor se comparan con la lista oficial de salidas de The Tor Project. Las señales de datacenter y VPN son heurísticas: el operador de la red (ASN) se compara con proveedores conocidos de nube, hosting y VPN, y se revisa si el nombre de DNS inverso contiene palabras como vpn o server. Por eso el resultado dice probable: una red de hosting también puede dar servicio a oficinas, y algunas VPN usan proveedores comunes."}},{"@type":"Question","name":"¿Cuál es la diferencia entre una dirección IP pública y una privada?","acceptedAnswer":{"@type":"Answer","text":"Una IP pública es única en Internet y es la que ven los sitios web. Las direcciones privadas como 192.168.x.x, 10.x.x.x y 172.16–31.x.x se reutilizan en millones de hogares y oficinas y no son accesibles desde Internet; tu router las traduce a su IP pública con NAT. Al consultar una IP privada se muestra una explicación en lugar de una ubicación."}},{"@type":"Question","name":"¿IP Lookup es gratis? ¿Guardan mis consultas?","acceptedAnswer":{"@type":"Answer","text":"Sí, es gratis y sin registro: tu IP, consultas de una IP o de un dominio y lotes pequeños de hasta 10 direcciones. No guardamos ni registramos las direcciones que consultas; tus búsquedas recientes se guardan solo en tu propio navegador. Una licencia Pro opcional de pago único agrega consultas por lotes de hasta 1,000 IP, revisión de listas negras y exportación a CSV/JSON."}}]}</script>
+  <script src="/config.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/consent.js"></script>
+  <script src="/monetize.js"></script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/">
+  <link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/">
+  <link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/">
+  <link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/">
+  <link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/">
+  <link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/">
+  <link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/">
+  <!-- hreflang:end -->
+  <meta property="og:locale" content="es_ES">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+    <a class="brand" href="/es/" aria-label="Inicio de IP Lookup">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">IP Lookup</span><span class="brand-desc">Consulta de dirección IP</span></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <details class="more-tools">
+        <summary class="btn btn-ghost btn-sm" aria-label="Más herramientas"><span class="mt-label">Más herramientas</span> ▾</summary>
+        <div class="menu">
+          <a href="https://quickinvoice-tool.vercel.app"><span class="mi">Q</span>QuickInvoice<small>Facturas</small></a>
+          <a href="https://ratecalc-tool.vercel.app"><span class="mi">R</span>RateCalc<small>Tarifas freelance</small></a>
+          <a href="https://qrforge-tool.vercel.app"><span class="mi">Q</span>QRForge<small>Códigos QR</small></a>
+          <a href="https://squish-tool.vercel.app"><span class="mi">S</span>Squish<small>Compresor de imágenes</small></a>
+          <a href="https://growthcalc-tool.vercel.app"><span class="mi">G</span>GrowthCalc<small>Interés compuesto</small></a>
+          <a href="https://subnetkit-tool.vercel.app"><span class="mi">N</span>SubnetKit<small>Subredes IP</small></a>
+          <a href="https://shotstudio-tool.vercel.app"><span class="mi">S</span>Screenshot Studio<small>Mockups de capturas</small></a>
+          <a href="https://mockuplab-tool.vercel.app"><span class="mi">M</span>Social Mockup Lab<small>Mockups de chats y posts</small></a>
+          <a href="https://carouselmaker-tool.vercel.app"><span class="mi">C</span>Carousel Maker<small>Slides para carrusel</small></a>
+          <a href="https://creativeresize-tool.vercel.app"><span class="mi">R</span>Creative Resize<small>Formatos para redes</small></a>
+          <a href="https://framelab-tool.vercel.app"><span class="mi">F</span>Frame Lab<small>Marcos y mockups de fotos</small></a>
+          <a href="https://giveaway-tool.vercel.app"><span class="mi">G</span>Giveaway Picker<small>Sorteos de Instagram</small></a>
+          <a href="https://iplookup-tool.vercel.app" class="current"><span class="mi">I</span>IP Lookup<small>Consulta de IP</small></a>
+          <a href="https://sizeconverter-tool.vercel.app"><span class="mi">Z</span>Size Converter<small>Redimensionador de imágenes y videos</small></a>
+        </div>
+      </details>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="brand-by">por <b>Be Management</b></span>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Instala esta herramienta como app">⤓ Instalar</button>
+      <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button><button class="btn icon-btn btn-sm" data-action="theme" aria-label="Cambiar tema">◐</button>
+    </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero container">
+  <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Be Management Tools · Redes</span>
+  <h1>¿Cuál es mi IP? Consulta de dirección IP</h1>
+  <p class="tagline">Mira tu IP pública al instante o consulta cualquier IP o dominio para obtener su ubicación aproximada, ISP, ASN, DNS inverso y si es una dirección de VPN, Tor o datacenter.</p>
+  <div class="badges">
+  <span class="badge">100 % gratis</span>
+  <span class="badge">Sin registro</span>
+  <span class="badge">IPv4 + IPv6</span>
+  <span class="badge">Las consultas no se guardan</span>
+  <span class="badge">Enlaces para compartir</span>
+  </div>
+</section>
+
+<main class="container">
+  <div class="tool-layout">
+    <div class="tool-col">
+
+      <!-- Your IP -->
+      <section class="card" id="meCard" aria-labelledby="meTitle" aria-live="polite">
+        <h2 id="meTitle" class="card-title">Tu dirección IP pública</h2>
+        <div id="meBody"><div class="loading"><span class="spinner" aria-hidden="true"></span>Detectando tu dirección IP…</div></div>
+      </section>
+
+      <!-- Lookup -->
+      <section class="card" id="lookupCard" aria-labelledby="lookupTitle">
+        <h2 id="lookupTitle" class="card-title">Consulta de IP y dominios</h2>
+        <form class="lookup-form" id="lookupForm" role="search">
+          <label for="q" class="sr-only">Dirección IP o dominio</label>
+          <input id="q" name="q" class="mono" type="text" placeholder="8.8.8.8, 2001:4860:4860::8888 o example.com" autocomplete="off" spellcheck="false" autocapitalize="off" maxlength="300">
+          <button class="btn btn-primary" type="submit" id="lookupBtn">Consultar</button>
+        </form>
+        <div class="examples" aria-label="Ejemplos">
+          <span class="hint" style="margin:0">Prueba:</span>
+          <button type="button" class="chip" data-q="8.8.8.8">8.8.8.8</button>
+          <button type="button" class="chip" data-q="1.1.1.1">1.1.1.1</button>
+          <button type="button" class="chip" data-q="google.com">google.com</button>
+          <button type="button" class="chip" data-q="2606:4700:4700::1111">2606:4700:4700::1111</button>
+          <button type="button" class="chip" data-q="192.168.1.1">192.168.1.1</button>
+        </div>
+        <p class="err" id="lookupErr" role="alert"></p>
+        <div id="lookupOut"></div>
+        <div class="row-between" style="margin-top:18px">
+          <span class="section-label" style="margin:0">Consultas recientes</span>
+          <button type="button" class="btn btn-ghost btn-sm" id="clearHistory">Borrar historial</button>
+        </div>
+        <div class="history" id="history" style="margin-top:8px"></div>
+      </section>
+
+      <!-- Batch (Pro above 10) -->
+      <section class="card pro-panel" id="batchCard" aria-labelledby="batchTitle">
+        <h2 id="batchTitle" class="card-title">Consulta de IP por lotes <span class="pro-badge" title="Free: up to 10 IPs · Pro: up to 1,000">PRO</span></h2>
+        <p class="hint" style="margin-top:0">Pega las IP separadas por saltos de línea, espacios o comas, o sube un archivo CSV/TXT. Gratis: hasta 10 IP por lote. Pro: hasta 1,000.</p>
+        <div class="field">
+          <label for="batchInput">Direcciones IP</label>
+          <textarea id="batchInput" class="mono" spellcheck="false" placeholder="8.8.8.8&#10;1.1.1.1&#10;9.9.9.9">8.8.8.8
+1.1.1.1
+9.9.9.9</textarea>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary" type="button" id="batchRun">Ejecutar lote</button>
+          <label class="btn" for="batchFile" style="margin:0">Subir CSV/TXT</label>
+          <input type="file" id="batchFile" accept=".csv,.txt,text/csv,text/plain" class="sr-only">
+          <span class="hint" id="batchCount" style="margin:0"></span>
+        </div>
+        <p class="err" id="batchErr" role="alert"></p>
+        <div id="batchOut" class="hidden">
+          <div class="table-actions">
+            <button class="btn btn-sm" type="button" data-export="csv">⬇ Exportar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            <button class="btn btn-sm" type="button" data-export="json">⬇ Exportar JSON <span class="pro-badge" data-pro-lock>PRO</span></button>
+          </div>
+          <div class="table-wrap">
+            <table id="batchTable" class="sortable">
+              <thead><tr>
+                <th data-key="ip" tabindex="0">IP</th><th data-key="country" tabindex="0">País</th><th data-key="city" tabindex="0">Ciudad</th>
+                <th data-key="asn" tabindex="0" class="num">ASN</th><th data-key="org" tabindex="0">ISP / organización</th><th data-key="rdns" tabindex="0">DNS inverso</th><th data-key="flags" tabindex="0">Indicadores</th>
+              </tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="attrib">Geolocalización de IP por <a href="https://db-ip.com" target="_blank" rel="noopener">DB-IP</a> (CC BY 4.0) · Datos de ASN: RouteViews / DB-IP (CC BY 4.0)</p>
+        </div>
+      </section>
+
+      <!-- Blacklist (Pro) -->
+      <section class="card pro-panel" id="blCard" aria-labelledby="blTitle">
+        <h2 id="blTitle" class="card-title">Revisión de listas negras y reputación <span class="pro-badge" data-pro-lock>PRO</span></h2>
+        <p class="hint" style="margin-top:0">Revisa una dirección IPv4/IPv6 en listas de bloqueo DNS de spam (SpamCop, PSBL), la lista de botnets Feodo Tracker de abuse.ch y la lista de salidas de Tor.</p>
+        <form class="lookup-form" id="blForm">
+          <label for="blIp" class="sr-only">Dirección IP a revisar</label>
+          <input id="blIp" class="mono" type="text" placeholder="Dirección IP, p. ej. 203.0.113.7" autocomplete="off" spellcheck="false" maxlength="64">
+          <button class="btn btn-primary" type="submit">Revisar</button>
+        </form>
+        <p class="err" id="blErr" role="alert"></p>
+        <div id="blOut"></div>
+      </section>
+
+      <!-- Privacy & ethics -->
+      <section class="card ethics" aria-labelledby="ethicsTitle">
+        <h2 id="ethicsTitle" class="card-title">Privacidad y ética</h2>
+        <ul>
+          <li><b>La ubicación es aproximada.</b> Es una estimación a nivel de ciudad o región de dónde está registrada o enrutada una red, nunca una dirección postal.</li>
+          <li><b>Una IP no identifica a una persona.</b> Muchas personas comparten una misma dirección, y las direcciones cambian con el tiempo.</li>
+          <li><b>No guardamos las consultas.</b> Las direcciones que buscas se procesan en memoria y nunca se registran; tu historial se queda en tu navegador.</li>
+          <li><b>Identificar a un abonado</b> requiere los registros del proveedor de Internet, que normalmente solo se entregan con una orden judicial o una solicitud legal.</li>
+        </ul>
+      </section>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="ad-slot" data-slot="sidebar-1"></div>
+      <div class="card pro-card">
+        <h3>Hazte Pro <span class="pro-badge">DE POR VIDA</span></h3>
+        <ul>
+          <li>Consultas por lotes de hasta 1,000 IP</li>
+          <li>Revisión de reputación en listas negras y de botnets</li>
+          <li>Exporta los resultados en CSV o JSON</li>
+          <li>Apoya a una pequeña herramienta independiente</li>
+        </ul>
+        <button class="btn btn-primary btn-block" data-action="pro" data-arg="sidebar">Hazte Pro – <span data-pro-price>$9</span> pago único</button>
+      </div>
+      <div class="card lead-card" id="leadCard" hidden>
+        <h3>Consejos y herramientas de redes</h3>
+        <p class="hint">Guías prácticas de redes y nuevas herramientas gratis para gente de IT, una o dos veces al mes. Sin spam.</p>
+        <form class="lead-form" data-action="newsletter">
+          <input type="email" name="email" required placeholder="tu@correo.com" aria-label="Correo electrónico" autocomplete="email">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <button class="btn btn-primary" type="submit">Suscribirme</button>
+        </form>
+        <p class="hint tiny">Sin spam. Cancela cuando quieras.</p>
+      </div>
+      <div class="ad-slot" data-slot="sidebar-2"></div>
+    </aside>
+  </div>
+
+  <div class="ad-slot horizontal" data-slot="below-tool"></div>
+</main>
+
+<section class="content container">
+  <div class="features">
+    <div class="feature"><div class="ic">🌍</div><h3>Ubicación aproximada</h3><p>País, región y ciudad de cualquier dirección IPv4 o IPv6 pública, con enlace al mapa y una nota honesta sobre la precisión.</p></div>
+    <div class="feature"><div class="ic">🏢</div><h3>ISP, ASN y propietario</h3><p>Sistema autónomo, nombre de la red, rango CIDR, registro y contacto de abuso desde RDAP.</p></div>
+    <div class="feature"><div class="ic">🛡️</div><h3>Señales de VPN, Tor y hosting</h3><p>Lista oficial de salidas de Tor más heurísticas transparentes para redes de datacenter y VPN.</p></div>
+    <div class="feature"><div class="ic">🔗</div><h3>Dominios y uso compartido</h3><p>Consulta un dominio para ver todos los servidores a los que resuelve y comparte cualquier resultado con un enlace.</p></div>
+  </div>
+
+  <h2>¿Qué es una dirección IP?</h2>
+  <p>Una dirección IP (Internet Protocol) es el número que identifica una conexión en una red, como el remitente en un sobre. Las direcciones <strong>IPv4</strong> se ven como <code>203.0.113.7</code> y solo hay unos 4,300 millones; las direcciones <strong>IPv6</strong> como <code>2001:db8::1</code> tienen 128 bits y son prácticamente ilimitadas. Muchas conexiones ahora tienen ambas, por eso la tarjeta de arriba puede mostrar cualquiera de las dos versiones.</p>
+
+  <h2>Direcciones IP públicas y privadas</h2>
+  <p>Tu <strong>IP pública</strong> la asigna tu proveedor de Internet y es la que ve cada sitio web. Dentro de tu casa u oficina, los dispositivos usan <strong>direcciones privadas</strong> como <code>192.168.1.20</code>, <code>10.0.0.5</code> o <code>172.16.0.8</code>. Millones de redes reutilizan estos rangos, así que tu router los traduce a su única dirección pública (NAT). Muchos proveedores móviles y de fibra agregan otra capa, el NAT de operador (<code>100.64.0.0/10</code>), para que varios clientes compartan una misma IP pública. Si consultas una dirección privada aquí, te explicamos qué es en lugar de inventar una ubicación.</p>
+
+  <h2>Cómo funciona la geolocalización por IP y por qué es aproximada</h2>
+  <p>Los registros regionales (ARIN, RIPE NCC, APNIC, LACNIC, AFRINIC) asignan bloques de direcciones a los proveedores. Las bases de datos de geolocalización combinan esos registros con datos de enrutamiento, mediciones de latencia y comentarios de usuarios para estimar dónde se usa cada bloque. El país suele ser correcto, pero la ciudad a menudo es la ubicación de los equipos del proveedor, que puede estar lejos del usuario. Las VPN, las redes corporativas y los datos móviles hacen que la estimación sea aún más imprecisa. Por eso IP Lookup siempre marca la ubicación como <em>aproximada</em>: es una ciudad o región, nunca una dirección postal.</p>
+
+  <h2>ISP, ASN y DNS inverso</h2>
+  <p>Internet está formada por decenas de miles de <strong>sistemas autónomos</strong>, cada uno con un número (ASN) y un operador, por ejemplo AS15169 (Google) o AS13335 (Cloudflare). El ASN te dice qué proveedor o empresa anuncia la dirección. El <strong>DNS inverso</strong> (un registro PTR) es el nombre de host que el propietario eligió para una IP, como <code>dns.google</code>; a menudo revela el proveedor, el tipo de conexión o la función del servidor. La sección de red agrega el bloque registrado, su CIDR, el registro y el correo de abuso para denunciar spam o ataques.</p>
+
+  <h2>Cómo funciona la detección de VPN, Tor y datacenters</h2>
+  <p>Los nodos de salida de Tor se comparan con la lista pública de salidas de The Tor Project, así que ese indicador es confiable. Los indicadores de datacenter y VPN son <strong>heurísticas</strong>: comparamos el operador de la red con listas de proveedores de nube, hosting y VPN, y buscamos palabras como <em>vpn</em> o <em>server</em> en el nombre de DNS inverso. Los motivos siempre se muestran, y el resultado dice "probable" porque una red de hosting también puede dar servicio a empresas y algunas VPN alquilan direcciones comunes.</p>
+
+  <h2>Cómo ocultar tu dirección IP</h2>
+  <p>Si quieres que los sitios web vean otra dirección, las opciones habituales son una <strong>VPN</strong> (cifra tu tráfico y sale por el servidor del proveedor), el <strong>Tor Browser</strong> (enruta a través de tres relays voluntarios; es más lento y gratis) o un <strong>proxy</strong> para una sola app. Cada opción traslada la confianza a otro operador en lugar de eliminarla, así que elige uno cuyas políticas entiendas, y recuerda que las cookies y los inicios de sesión pueden identificarte sin importar tu IP.</p>
+
+  <div class="faq">
+    <h2>Preguntas frecuentes</h2>
+    <details><summary>¿Cuál es mi dirección IP?</summary><p>Tu dirección IP pública es la dirección que ven los sitios web cuando te conectas a ellos. La asigna tu proveedor de Internet (o tu VPN, si usas una) y la comparten todos los dispositivos detrás de tu router. IP Lookup la muestra en la parte superior de la página apenas carga, junto con si es IPv4 o IPv6.</p></details>
+    <details><summary>¿Alguien puede encontrar mi dirección exacta a partir de mi IP?</summary><p>No. Las bases de datos de geolocalización por IP solo estiman la ciudad o región donde está registrada o enrutada una red, y a menudo se equivocan por decenas de kilómetros. Una dirección IP no revela una dirección postal ni a una persona. Solo tu proveedor de Internet puede vincular una IP con un abonado, y normalmente lo hace solo ante una orden judicial o una solicitud legal de las autoridades.</p></details>
+    <details><summary>¿Por qué la consulta de IP muestra la ciudad equivocada?</summary><p>Los proveedores asignan direcciones de grandes grupos y las enrutan a través de nodos regionales, por lo que la base de datos suele mostrar la ciudad donde están los equipos del proveedor en lugar de la tuya. Las redes móviles, el NAT de operador, las VPN y las redes corporativas lo hacen aún menos preciso. Toma la ubicación como aproximada: el país suele ser correcto; la ciudad es una estimación.</p></details>
+    <details><summary>¿Cómo detecta IP Lookup las IP de VPN, Tor y datacenters?</summary><p>Las salidas de Tor se comparan con la lista oficial de salidas de The Tor Project. Las señales de datacenter y VPN son heurísticas: el operador de la red (ASN) se compara con proveedores conocidos de nube, hosting y VPN, y se revisa si el nombre de DNS inverso contiene palabras como vpn o server. Por eso el resultado dice probable: una red de hosting también puede dar servicio a oficinas, y algunas VPN usan proveedores comunes.</p></details>
+    <details><summary>¿Cuál es la diferencia entre una dirección IP pública y una privada?</summary><p>Una IP pública es única en Internet y es la que ven los sitios web. Las direcciones privadas como 192.168.x.x, 10.x.x.x y 172.16–31.x.x se reutilizan en millones de hogares y oficinas y no son accesibles desde Internet; tu router las traduce a su IP pública con NAT. Al consultar una IP privada se muestra una explicación en lugar de una ubicación.</p></details>
+    <details><summary>¿IP Lookup es gratis? ¿Guardan mis consultas?</summary><p>Sí, es gratis y sin registro: tu IP, consultas de una IP o de un dominio y lotes pequeños de hasta 10 direcciones. No guardamos ni registramos las direcciones que consultas; tus búsquedas recientes se guardan solo en tu propio navegador. Una licencia Pro opcional de pago único agrega consultas por lotes de hasta 1,000 IP, revisión de listas negras y exportación a CSV/JSON.</p></details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>Una colección de herramientas gratuitas y privadas que funcionan por completo en tu navegador. IP Lookup es la herramienta de consulta de direcciones IP de la familia, creada y mantenida por Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>Más herramientas gratis</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Facturas</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Tarifas freelance</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · Códigos QR</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Compresor de imágenes</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Interés compuesto</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app">SubnetKit · Subredes IP</a></li>
+        <li><a href="https://shotstudio-tool.vercel.app">Screenshot Studio · Mockups de capturas</a></li>
+        <li><a href="https://mockuplab-tool.vercel.app">Social Mockup Lab · Mockups de chats y posts</a></li>
+        <li><a href="https://carouselmaker-tool.vercel.app">Carousel Maker · Slides para carrusel</a></li>
+        <li><a href="https://creativeresize-tool.vercel.app">Creative Resize · Formatos para redes</a></li>
+        <li><a href="https://framelab-tool.vercel.app">Frame Lab · Marcos y mockups de fotos</a></li>
+        <li><a href="https://giveaway-tool.vercel.app">Giveaway Picker · Sorteos de Instagram</a></li>
+        <li><a href="https://iplookup-tool.vercel.app" class="current">IP Lookup · Consulta de IP</a></li>
+        <li><a href="https://sizeconverter-tool.vercel.app">Size Converter · Redimensionador de imágenes y videos</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · IP Lookup. Datos aproximados de fuentes públicas. Las consultas no se guardan.</span>
+      <span><a href="/es/privacy" data-i18n-href="/es/privacy">Privacidad</a> · <a href="/es/terms" data-i18n-href="/es/terms">Términos</a> · <a href="#" data-action="cookie-settings">Configuración de cookies</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proTitle">
+  <div class="card">
+    <button class="btn btn-sm close" data-action="close-pro" aria-label="Cerrar">✕</button>
+    <h3 id="proTitle">Pásate a IP Lookup Pro <span class="pro-badge">DE POR VIDA</span></h3>
+    <div class="price"><span id="proPrice"></span> <small>pago único</small></div>
+    <ul>
+      <li>Consultas por lotes de hasta 1,000 IP (gratis: 10)</li>
+      <li>Revisión de listas negras: SpamCop, PSBL, Feodo Tracker, Tor</li>
+      <li>Exporta los resultados por lotes en CSV y JSON</li>
+      <li>Acceso de por vida, sin suscripción</li>
+    </ul>
+    <button class="btn btn-primary btn-block" data-action="checkout">Hazte Pro</button>
+    <p class="hint" style="margin-top:12px">¿Ya compraste? <a href="#" data-action="toggle-license">Ingresa la clave de licencia</a></p>
+    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="Clave de licencia" aria-label="Clave de licencia"><button class="btn" data-action="activate-license">Activar</button></div>
+  </div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

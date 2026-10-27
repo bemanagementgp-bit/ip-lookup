@@ -22,6 +22,16 @@
   <script src="/i18n.js"></script>
   <script src="/consent.js"></script>
   <script src="/monetize.js"></script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/terms">
+  <link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/terms">
+  <link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/terms">
+  <link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/terms">
+  <link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/terms">
+  <link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/terms">
+  <link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/terms">
+  <!-- hreflang:end -->
 </head>
 <body>
 <header class="site-header">
@@ -53,9 +63,9 @@
       </details>
       <span class="sep" aria-hidden="true"></span>
       <span class="brand-by">by <b>Be Management</b></span>
-      <button class="btn btn-sm hidden" id="installBtn" onclick="installApp()" title="Install this tool as an app">⤓ Install</button>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Install this tool as an app">⤓ Install</button>
       <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
-      <button class="btn btn-primary btn-sm" onclick="openPro('nav')">Pro</button><button class="btn icon-btn btn-sm" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button><button class="btn icon-btn btn-sm" data-action="theme" aria-label="Toggle theme">◐</button>
     </nav>
     </div>
   </div>
@@ -118,7 +128,7 @@
     </div>
     <div class="footer-meta">
       <span>© <span data-year></span> Be Management · IP Lookup. Approximate data from public sources. Lookups are not stored.</span>
-      <span><a href="/privacy" data-i18n-href="/privacy">Privacy</a> · <a href="/terms" data-i18n-href="/terms">Terms</a> · <a href="#" onclick="window.bmConsent&&bmConsent.open();return false">Cookie settings</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+      <span><a href="/privacy" data-i18n-href="/privacy">Privacy</a> · <a href="/terms" data-i18n-href="/terms">Terms</a> · <a href="#" data-action="cookie-settings">Cookie settings</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
     </div>
   </div>
 </footer>

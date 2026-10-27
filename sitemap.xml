@@ -1,6 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://iplookup-tool.vercel.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://iplookup-tool.vercel.app/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://iplookup-tool.vercel.app/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://iplookup-tool.vercel.app/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/es/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/pt/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/fr/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/de/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/it/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/es/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/pt/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/fr/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/de/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/it/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/es/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/pt/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/fr/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/de/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://iplookup-tool.vercel.app/it/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://iplookup-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://iplookup-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://iplookup-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://iplookup-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://iplookup-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://iplookup-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://iplookup-tool.vercel.app/terms"/>
+  </url>
 </urlset>
