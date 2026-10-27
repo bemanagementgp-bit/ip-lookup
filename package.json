@@ -1,0 +1,19 @@
+{
+  "name": "ip-lookup",
+  "version": "1.0.0",
+  "private": true,
+  "description": "IP Lookup – what is my IP, IP/domain geolocation, ASN, reverse DNS, VPN/Tor/datacenter heuristics. Static site + Vercel functions.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node test/run.js",
+    "dev": "node dev-server.js"
+  },
+  "dependencies": {
+    "@ip-location-db/asn-mmdb": "^2.3.2026061719",
+    "@ip-location-db/dbip-city-mmdb": "^2.3.2026060513",
+    "maxmind": "^5.0.7"
+  }
+}

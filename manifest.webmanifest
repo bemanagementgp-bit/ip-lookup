@@ -1,0 +1,35 @@
+{
+  "name": "IP Lookup – Be Management Tools",
+  "short_name": "IP Lookup",
+  "description": "See your public IP instantly, or look up any IP or domain to get its approximate location, ISP, ASN, reverse DNS and whether it is a VPN, Tor or datacenter address.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050403",
+  "theme_color": "#050403",
+  "lang": "en",
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

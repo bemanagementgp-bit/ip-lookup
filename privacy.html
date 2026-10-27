@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="theme-color" content="#050403">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="IP Lookup">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy | IP Lookup</title>
+  <meta name="description" content="Privacy policy for IP Lookup: how your IP address and lookups are processed, what is never stored, cookies, ads and data sources.">
+  <link rel="canonical" href="https://__SITE_URL__/privacy">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/config.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/consent.js"></script>
+  <script src="/monetize.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+    <a class="brand" href="/" aria-label="IP Lookup home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">IP Lookup</span><span class="brand-desc">IP address lookup</span></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <details class="more-tools">
+        <summary class="btn btn-ghost btn-sm" aria-label="More tools"><span class="mt-label">More tools</span> ▾</summary>
+        <div class="menu">
+          <a href="https://quickinvoice-tool.vercel.app"><span class="mi">Q</span>QuickInvoice<small>Invoices</small></a>
+          <a href="https://ratecalc-tool.vercel.app"><span class="mi">R</span>RateCalc<small>Freelance rates</small></a>
+          <a href="https://qrforge-tool.vercel.app"><span class="mi">Q</span>QRForge<small>QR codes</small></a>
+          <a href="https://squish-tool.vercel.app"><span class="mi">S</span>Squish<small>Image compressor</small></a>
+          <a href="https://growthcalc-tool.vercel.app"><span class="mi">G</span>GrowthCalc<small>Compound interest</small></a>
+          <a href="https://subnetkit-tool.vercel.app"><span class="mi">N</span>SubnetKit<small>IP subnets</small></a>
+          <a href="https://shotstudio-tool.vercel.app"><span class="mi">S</span>Screenshot Studio<small>Screenshot mockups</small></a>
+          <a href="https://mockuplab-tool.vercel.app"><span class="mi">M</span>Social Mockup Lab<small>Chat & post mockups</small></a>
+          <a href="https://carouselmaker-tool.vercel.app"><span class="mi">C</span>Carousel Maker<small>Carousel slides</small></a>
+          <a href="https://creativeresize-tool.vercel.app"><span class="mi">R</span>Creative Resize<small>Social formats</small></a>
+          <a href="https://framelab-tool.vercel.app"><span class="mi">F</span>Frame Lab<small>Photo frames & mockups</small></a>
+          <a href="https://giveaway-tool.vercel.app"><span class="mi">G</span>Giveaway Picker<small>Instagram giveaways</small></a>
+          <a href="https://iplookup-tool.vercel.app" class="current"><span class="mi">I</span>IP Lookup<small>IP lookup</small></a>
+          <a href="https://sizeconverter-tool.vercel.app"><span class="mi">Z</span>Size Converter<small>Image & video resizer</small></a>
+        </div>
+      </details>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="brand-by">by <b>Be Management</b></span>
+      <button class="btn btn-sm hidden" id="installBtn" onclick="installApp()" title="Install this tool as an app">⤓ Install</button>
+      <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
+      <button class="btn btn-primary btn-sm" onclick="openPro('nav')">Pro</button><button class="btn icon-btn btn-sm" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+    </nav>
+    </div>
+  </div>
+</header>
+
+<main class="container content" style="max-width:820px">
+  <h1>Privacy Policy</h1>
+  <p class="hint">Last updated: October 27, 2026</p>
+
+  <h2>What IP Lookup does</h2>
+  <p>IP Lookup shows the public IP address your browser connects from and lets you look up other IP addresses and domain names. To do that, our serverless functions (hosted on Vercel) receive your IP address as part of every web request, exactly like any website does.</p>
+
+  <h2>What we do not store</h2>
+  <ul>
+    <li>We do <strong>not</strong> log, store or sell the IP addresses or domains you look up, nor your own IP address. They are processed in memory only for the duration of the request.</li>
+    <li>A short-lived in-memory counter keyed by your IP is used to limit abuse (60 requests per minute). It is discarded automatically and never written to disk.</li>
+    <li>Your recent lookups, batch input and theme preference are saved in your browser's localStorage, on your device only. You can clear the history at any time with the "Clear history" button or by clearing site data.</li>
+    <li>Browser and operating-system information shown on the page is computed locally in your browser and never sent to us.</li>
+  </ul>
+
+  <h2>Third parties contacted for a lookup</h2>
+  <ul>
+    <li><strong>DNS resolvers</strong> for reverse DNS, domain resolution and DNS blocklist checks.</li>
+    <li><strong>rdap.org</strong> and the regional Internet registries (ARIN, RIPE NCC, APNIC, LACNIC, AFRINIC) to fetch public network registration data for the address you look up.</li>
+    <li><strong>The Tor Project</strong> and <strong>abuse.ch</strong> to download their public lists (not per lookup; lists are cached).</li>
+    <li>For Pro features, your license key is checked with our payments service (bm-payments.vercel.app). The key is never shared with other parties.</li>
+  </ul>
+  <p>Hosting provider Vercel may keep standard request logs (including IP addresses) for security and operations under its own privacy policy.</p>
+
+  <h2>Accuracy and ethics</h2>
+  <p>Geolocation is approximate (city or region) and describes where a network is registered or routed. It never identifies a person or a street address. Only an Internet provider can link an IP address to a subscriber, normally under a court order. Please do not use this tool to harass, track or identify individuals.</p>
+
+  <h2>Data sources and attribution</h2>
+  <ul>
+    <li>IP geolocation by <a href="https://db-ip.com" target="_blank" rel="noopener">DB-IP</a>, licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</li>
+    <li>ASN data: RouteViews / DB-IP via <a href="https://github.com/sapics/ip-location-db" target="_blank" rel="noopener">ip-location-db</a>, CC BY 4.0.</li>
+    <li>Tor exit list: The Tor Project. Botnet C2 list: abuse.ch Feodo Tracker (CC0). DNS blocklists: SpamCop, PSBL.</li>
+  </ul>
+
+  <h2>Cookies, analytics and advertising</h2>
+  <p>If analytics (Google Analytics) or advertising (Google AdSense) are enabled, those services may set cookies and process data such as your IP address and device information to measure usage and show ads, including personalised ads where permitted. You can opt out of personalised advertising at <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads Settings</a>. Learn how Google uses data at <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">policies.google.com/technologies/partner-sites</a>.</p>
+
+  <h2>Payments</h2>
+  <p>Pro purchases are processed by Mercado Pago. We never see your card details. We receive a payment ID to issue and validate your license key.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy: contact Be Management through the details on the site.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>A collection of free, private tools that run entirely in your browser. IP Lookup is the ip address lookup of the family, built and maintained by Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>More free tools</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Invoices</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Freelance rates</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · QR codes</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Image compressor</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Compound interest</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app">SubnetKit · IP subnets</a></li>
+        <li><a href="https://shotstudio-tool.vercel.app">Screenshot Studio · Screenshot mockups</a></li>
+        <li><a href="https://mockuplab-tool.vercel.app">Social Mockup Lab · Chat & post mockups</a></li>
+        <li><a href="https://carouselmaker-tool.vercel.app">Carousel Maker · Carousel slides</a></li>
+        <li><a href="https://creativeresize-tool.vercel.app">Creative Resize · Social formats</a></li>
+        <li><a href="https://framelab-tool.vercel.app">Frame Lab · Photo frames & mockups</a></li>
+        <li><a href="https://giveaway-tool.vercel.app">Giveaway Picker · Instagram giveaways</a></li>
+        <li><a href="https://iplookup-tool.vercel.app" class="current">IP Lookup · IP lookup</a></li>
+        <li><a href="https://sizeconverter-tool.vercel.app">Size Converter · Image & video resizer</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · IP Lookup. Approximate data from public sources. Lookups are not stored.</span>
+      <span><a href="/privacy" data-i18n-href="/privacy">Privacy</a> · <a href="/terms" data-i18n-href="/terms">Terms</a> · <a href="#" onclick="window.bmConsent&&bmConsent.open();return false">Cookie settings</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

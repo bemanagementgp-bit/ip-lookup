@@ -1,0 +1,16 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {
+    "api/*.js": { "maxDuration": 10, "memory": 1024, "includeFiles": "node_modules/@ip-location-db/{dbip-city-mmdb/dbip-city-ipv4.mmdb,dbip-city-mmdb/dbip-city-ipv6.mmdb,asn-mmdb/asn.mmdb}" }
+  },
+  "headers": [
+    { "source": "/(.*)", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+    ] },
+    { "source": "/api/(.*)", "headers": [
+      { "key": "Cache-Control", "value": "no-store" }
+    ] }
+  ]
+}
