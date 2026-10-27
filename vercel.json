@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "functions": {
-    "api/*.js": { "maxDuration": 10, "memory": 1024, "includeFiles": "node_modules/@ip-location-db/{dbip-city-mmdb/dbip-city-ipv4.mmdb,dbip-city-mmdb/dbip-city-ipv6.mmdb,asn-mmdb/asn.mmdb}" }
+    "api/*.js": { "maxDuration": 10, "memory": 1024, "includeFiles": "node_modules/@ip-location-db/**" }
   },
   "headers": [
     { "source": "/(.*)", "headers": [
